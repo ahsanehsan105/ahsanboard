@@ -26,7 +26,7 @@ const Dashboard = ({ sidebarCollapsed }) => {
 
   const fetchBoards = async () => {
     try {
-      const response = await api.get("/api/boards")
+      const response = await api.get("https://ahsanboard-api.vercel.app/api/boards")
       // Add mock participants to each board
       const boardsWithParticipants = response.data.map((board, index) => ({
         ...board,

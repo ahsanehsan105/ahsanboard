@@ -22,8 +22,8 @@ const Board = ({ sidebarCollapsed }) => {
   const fetchBoardData = async () => {
     try {
       const [boardResponse, listsResponse] = await Promise.all([
-        api.get(`/api/boards/${boardId}`),
-        api.get(`/api/boards/${boardId}/lists`),
+        api.get(`https://ahsanboard-api.vercel.app/api/boards/${boardId}`),
+        api.get(`https://ahsanboard-api.vercel.app/api/boards/${boardId}/lists`),
       ])
 
       setBoard(boardResponse.data)

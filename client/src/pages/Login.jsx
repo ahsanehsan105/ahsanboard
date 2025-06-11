@@ -25,7 +25,7 @@ const Login = ({ onLogin }) => {
     setError("")
 
     try {
-      const response = await api.post("/api/login", formData)
+      const response = await api.post("https://ahsanboard-api.vercel.app/api/login", formData)
       onLogin(response.data.token, response.data.user)
     } catch (error) {
       setError(error.response?.data?.error || "Login failed")
@@ -40,7 +40,7 @@ const Login = ({ onLogin }) => {
         <div className="bg-white rounded-lg shadow-xl p-6">
           <div className="text-center">
             <h2 className="text-2xl font-bold text-gray-900 mb-1">Sign In</h2>
-            <p className="text-gray-600 text-sm">Sign in to your Kanban account</p>
+            <p className="text-gray-600 text-sm">Sign in to your Trello account</p>
           </div>
 
           {error && (
