@@ -22,8 +22,8 @@ const Board = ({ sidebarCollapsed }) => {
   const fetchBoardData = async () => {
     try {
       const [boardResponse, listsResponse] = await Promise.all([
-        api.get(`https://ahsanboard-api.vercel.app/api/boards/${boardId}`),
-        api.get(`https://ahsanboard-api.vercel.app/api/boards/${boardId}/lists`),
+        api.get(`/api/boards/${boardId}`),
+        api.get(`/api/boards/${boardId}/lists`),
       ])
 
       setBoard(boardResponse.data)
@@ -35,7 +35,7 @@ const Board = ({ sidebarCollapsed }) => {
       // Fetch cards for each list
       const cardsData = {}
       for (const list of listsResponse.data) {
-        const cardsResponse = await api.get(`https://ahsanboard-api.vercel.app/lists/${list._id}/cards`)
+        const cardsResponse = await api.get(`/api/lists/${list._id}/cards`)
         cardsData[list._id] = cardsResponse.data
       }
       setCards(cardsData)
@@ -51,7 +51,7 @@ const Board = ({ sidebarCollapsed }) => {
 
   const handleCreateList = async (listData) => {
     try {
-      const response = await api.post(`https://ahsanboard-api.vercel.app/boards/${boardId}/lists`, {
+      const response = await api.post(`/api/boards/${boardId}/lists`, {
         ...listData,
         position: lists.length,
       })
@@ -65,7 +65,7 @@ const Board = ({ sidebarCollapsed }) => {
 
   const handleCreateCard = async (listId, cardData) => {
     try {
-      const response = await api.post(`https://ahsanboard-api.vercel.app/lists/${listId}/cards`, {
+      const response = await api.post(`/api/lists/${listId}/cards`, {
         ...cardData,
         position: cards[listId]?.length || 0,
       })
@@ -127,7 +127,7 @@ const Board = ({ sidebarCollapsed }) => {
 
       // Update card's list in backend
       try {
-        await api.put(`https://ahsanboard-api.vercel.app/cards/${draggableId}`, {
+        await api.put(`/api/cards/${draggableId}`, {
           ...movedCard,
           list: destListId,
           position: destination.index,

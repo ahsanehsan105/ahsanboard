@@ -39,7 +39,7 @@ const Card = ({ card, onUpdate }) => {
     setIsCompleted(newCompletedStatus)
 
     try {
-      await api.put(`https://ahsanboard-api.vercel.app/cards/${card._id}`, {
+      await api.put(`/api/cards/${card._id}`, {
         ...card,
         completed: newCompletedStatus,
       })
