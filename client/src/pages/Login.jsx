@@ -25,7 +25,7 @@ const Login = ({ onLogin }) => {
     setError("")
 
     try {
-      const response = await api.post("https://ahsanboard-api.vercel.app/api/login", formData)
+      const response = await api.post("https://ahsanboard-api.vercel.app/login", formData)
       onLogin(response.data.token, response.data.user)
     } catch (error) {
       setError(error.response?.data?.error || "Login failed")

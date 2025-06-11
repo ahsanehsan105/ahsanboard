@@ -33,7 +33,7 @@ const Register = ({ onLogin }) => {
     }
 
     try {
-      const response = await api.post("https://ahsanboard-api.vercel.app/api/register", {
+      const response = await api.post("https://ahsanboard-api.vercel.app/register", {
         username: formData.username,
         email: formData.email,
         password: formData.password,
