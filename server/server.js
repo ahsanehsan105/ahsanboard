@@ -10,7 +10,13 @@ const cardRoutes = require("./routes/cardRoute");
 
 const app = express();
 
-app.use(cors());
+app.use(cors(
+  {
+    origin: ["https://deploy-mern-1whq.vercel.app"],
+    methods: ["POST", "GET"],
+    credentials: true
+  }
+));
 app.use(express.json());
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb+srv://Ahsan:12345@cluster0.48pssop.mongodb.net/Trello")
