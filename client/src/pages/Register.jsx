@@ -1,8 +1,11 @@
 import { useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import api from "../utils/api"
+// Import react-toastify
+import { ToastContainer, toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 
-const Register = ({ onLogin }) => {
+const Register = () => {
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -11,6 +14,7 @@ const Register = ({ onLogin }) => {
   })
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
+  const navigate = useNavigate()
 
   const handleChange = (e) => {
     setFormData({
@@ -31,12 +35,17 @@ const Register = ({ onLogin }) => {
     }
 
     try {
-      const response = await api.post("/api/register", {
+      await api.post("/api/register", {
         username: formData.username,
         email: formData.email,
         password: formData.password,
       })
-      onLogin(response.data.token, response.data.user)
+      // Show success toast
+      toast.success("Account Created Successfully")
+      // Redirect to login page after short delay
+      setTimeout(() => {
+        navigate("/login")
+      }, 1500)
     } catch (error) {
       setError(error.response?.data?.error || "Registration failed")
     } finally {
@@ -46,6 +55,7 @@ const Register = ({ onLogin }) => {
 
   return (
     <div className="min-h-screen flex items-center justify-center py-4 px-2 sm:px-4 md:px-5 lg:px-6">
+      <ToastContainer position="top-right" autoClose={2000} />
       <div className="w-full max-w-sm space-y-6 ">
         <div className="bg-white rounded-lg shadow-xl p-4 md:p-4 sm:p-6">
           <div className="text-center">

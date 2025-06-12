@@ -1,13 +1,14 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import api from "../utils/api"
+import { toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 
 const Login = ({ onLogin }) => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   })
-  const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
 
   const handleChange = (e) => {
@@ -20,13 +21,13 @@ const Login = ({ onLogin }) => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setLoading(true)
-    setError("")
 
     try {
       const response = await api.post("/api/login", formData)
+      toast.success("Login Successful!")
       onLogin(response.data.token, response.data.user)
     } catch (error) {
-      setError(error.response?.data?.error || "Login failed")
+      toast.error("Credentials are wrong")
     } finally {
       setLoading(false)
     }
@@ -40,12 +41,6 @@ const Login = ({ onLogin }) => {
             <h2 className="text-2xl font-bold text-gray-900 mb-1">Sign In</h2>
             <p className="text-gray-600 text-sm">Sign in to your Trello account</p>
           </div>
-
-          {error && (
-            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded mt-3 text-sm">
-              {error}
-            </div>
-          )}
 
           <form className="mt-4 space-y-4" onSubmit={handleSubmit}>
             <div>
