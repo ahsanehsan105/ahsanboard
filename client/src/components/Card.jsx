@@ -1,5 +1,3 @@
-"use client"
-
 import { useState } from "react"
 import CardDetailModal from "./CardDetailModal"
 import api from "../utils/api"

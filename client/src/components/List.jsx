@@ -1,5 +1,3 @@
-"use client"
-
 import { useState } from "react"
 import { Droppable, Draggable } from "react-beautiful-dnd"
 import Card from "./Card"

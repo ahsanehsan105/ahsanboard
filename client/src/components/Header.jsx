@@ -1,5 +1,3 @@
-"use client"
-
 import { useState, useRef, useEffect } from "react"
 import { useParams, useLocation } from "react-router-dom"
 
@@ -43,7 +41,7 @@ const Header = ({ user, sidebarCollapsed, onLogout }) => {
   }
 
   return (
-    <div className="flex-shrink-0 bg-black bg-opacity-20 backdrop-blur-sm border-b border-white border-opacity-20 relative z-[100]">
+    <div className="flex-shrink-0 bg-slate-900 bg-opacity-20 backdrop-blur-sm border-b border-white border-opacity-20 relative z-[100]">
       <div
         className={`flex items-center justify-between py-3 transition-all duration-300 ${
           sidebarCollapsed ? "px-6 lg:px-8" : "px-4 lg:px-6"

@@ -1,5 +1,3 @@
-"use client"
-
 import { useState, useEffect } from "react"
 import { Link, useLocation } from "react-router-dom"
 import api from "../utils/api"
@@ -22,7 +20,7 @@ const Sidebar = ({ user, onLogout, onToggle }) => {
 
   const fetchBoards = async () => {
     try {
-      const response = await api.get("https://ahsanboard-api.vercel.app/api/boards")
+      const response = await api.get("/api/boards")
       setBoards(response.data)
     } catch (error) {
       console.error("Error fetching boards:", error)
