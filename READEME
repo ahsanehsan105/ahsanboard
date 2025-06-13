@@ -1,0 +1,21 @@
+// Setup Instructions
+// https://github.com/ahsanehsan105/ahsanboard.git
+// ahsanboard
+
+// Install dependencies
+// For client: npm run dev
+// For Server: npm start
+
+// API Documentation
+// auth APIs
+// board APIs
+// card APIs
+// list APIs
+
+// Features
+// Create Projects — Users can add new projects to the board.
+// Create and Assign Tasks — Create tasks and assign them to participants within the project.
+// Task Status Management — Drag & drop tasks between statuses like To Do, In Progress, and Completed.
+// Attractive and Clean UI — Modern, responsive, and intuitive design for a better user experience.
+// User Authentication — Secure signup and login system.
+// Comment and Activity Log — Keep track of task updates and participant comments (if included).

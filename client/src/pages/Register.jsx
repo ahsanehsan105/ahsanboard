@@ -81,6 +81,7 @@ const Register = () => {
                 required
                 value={formData.username}
                 onChange={handleChange}
+                placeholder="Enter your username"
                 className="block w-full px-2 py-1.5 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-xs sm:text-sm"
               />
             </div>
@@ -96,6 +97,7 @@ const Register = () => {
                 required
                 value={formData.email}
                 onChange={handleChange}
+                placeholder="Enter your email"
                 className="block w-full px-2 py-1.5 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-xs sm:text-sm"
               />
             </div>
@@ -111,6 +113,7 @@ const Register = () => {
                 required
                 value={formData.password}
                 onChange={handleChange}
+                placeholder="Enter your password"
                 className="block w-full px-2 py-1.5 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-xs sm:text-sm"
               />
             </div>
@@ -126,6 +129,7 @@ const Register = () => {
                 required
                 value={formData.confirmPassword}
                 onChange={handleChange}
+                placeholder="Enter your confirm password"
                 className="block w-full px-2 py-1.5 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-xs sm:text-sm"
               />
             </div>

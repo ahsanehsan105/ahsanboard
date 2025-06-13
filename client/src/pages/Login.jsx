@@ -19,7 +19,7 @@ const Login = ({ onLogin }) => {
   }
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault() // Prevent default form submission
     setLoading(true)
 
     try {
@@ -27,7 +27,9 @@ const Login = ({ onLogin }) => {
       toast.success("Login Successful!")
       onLogin(response.data.token, response.data.user)
     } catch (error) {
-      toast.error("Credentials are wrong")
+      // Set the error state and show toast
+      toast.error("Invalid email or password")
+      console.error("Login error:", error)
     } finally {
       setLoading(false)
     }
@@ -41,6 +43,7 @@ const Login = ({ onLogin }) => {
             <h2 className="text-2xl font-bold text-gray-900 mb-1">Sign In</h2>
             <p className="text-gray-600 text-sm">Sign in to your Trello account</p>
           </div>
+
 
           <form className="mt-4 space-y-4" onSubmit={handleSubmit}>
             <div>
@@ -56,6 +59,7 @@ const Login = ({ onLogin }) => {
                 onChange={handleChange}
                 className="block w-full px-2 py-1.5 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm"
                 placeholder="Enter your email"
+                autoComplete="email"
               />
             </div>
 
@@ -72,6 +76,7 @@ const Login = ({ onLogin }) => {
                 onChange={handleChange}
                 className="block w-full px-2 py-1.5 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm"
                 placeholder="Enter your password"
+                autoComplete="current-password"
               />
             </div>
 
