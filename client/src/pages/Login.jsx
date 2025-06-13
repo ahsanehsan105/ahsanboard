@@ -1,8 +1,8 @@
+"use client"
+
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import api from "../utils/api"
-import { toast } from "react-toastify"
-import "react-toastify/dist/ReactToastify.css"
 
 const Login = ({ onLogin }) => {
   const [formData, setFormData] = useState({
@@ -10,6 +10,7 @@ const Login = ({ onLogin }) => {
     password: "",
   })
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState("")
 
   const handleChange = (e) => {
     setFormData({
@@ -19,17 +20,50 @@ const Login = ({ onLogin }) => {
   }
 
   const handleSubmit = async (e) => {
-    e.preventDefault() // Prevent default form submission
+    e.preventDefault()
+
+    // Basic validation
+    if (!formData.email || !formData.password) {
+      setError("Email and password are required")
+      return
+    }
+
     setLoading(true)
+    setError("")
 
     try {
       const response = await api.post("/api/login", formData)
-      toast.success("Login Successful!")
+      // Call the onLogin prop with token and user data
       onLogin(response.data.token, response.data.user)
     } catch (error) {
-      // Set the error state and show toast
-      toast.error("Invalid email or password")
       console.error("Login error:", error)
+
+      // Handle specific error cases based on the API response
+      if (error.response) {
+        // The server responded with a status code outside the 2xx range
+        if (error.response.status === 401) {
+          // This is the status code your API returns for invalid credentials
+          setError("Invalid credentials. Please check your email and password.")
+        } else if (error.response.status === 404) {
+          // This would be if your API specifically returns 404 for user not found
+          setError("User not found with this email. Please register first.")
+        } else {
+          // For any other error status, use the error message from the API
+          setError(error.response.data.error || "An error occurred during login")
+        }
+      } else if (error.request) {
+        // The request was made but no response was received
+        setError("No response from server. Please try again later.")
+      } else {
+        // Something happened in setting up the request
+        setError("Error setting up request. Please try again.")
+      }
+
+      // Clear the password field on error
+      setFormData({
+        ...formData,
+        password: "",
+      })
     } finally {
       setLoading(false)
     }
@@ -44,8 +78,11 @@ const Login = ({ onLogin }) => {
             <p className="text-gray-600 text-sm">Sign in to your Trello account</p>
           </div>
 
-
           <form className="mt-4 space-y-4" onSubmit={handleSubmit}>
+            {error && (
+              <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-2 rounded-md text-sm">{error}</div>
+            )}
+
             <div>
               <label htmlFor="email" className="block text-xs font-medium text-gray-700">
                 Email Address
